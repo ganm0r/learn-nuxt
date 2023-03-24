@@ -1,16 +1,24 @@
 <script setup>
+import { useProductsStore } from "~~/stores/ProductsStore";
+
 const links = [
+  {
+    name: "Home",
+    path: "/",
+  },
   {
     name: "Products",
     path: "/products",
-    exact: false,
   },
   {
     name: "About",
     path: "/about",
-    exact: true,
   },
 ];
+
+const { fill } = useProductsStore();
+
+fill();
 </script>
 
 <template>
@@ -29,9 +37,11 @@ const links = [
         class="flex h-full items-center"
         :key="link.name"
       >
-        <NuxtLink :exact="link.exact" :to="link.path" class="text-md font-semibold uppercase">{{
-          link.name
-        }}</NuxtLink>
+        <NuxtLink
+          :to="link.path"
+          class="text-md font-semibold uppercase"
+          >{{ link.name }}</NuxtLink
+        >
       </div>
     </nav>
 
